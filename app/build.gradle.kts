@@ -72,6 +72,9 @@ android {
         testImplementation("io.mockk:mockk:1.12.2")
         testImplementation("io.mockk:mockk-agent-jvm:1.12.2")
 
+        testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
+        testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.0")
+
         testImplementation("junit:junit:4.13.2")
         androidTestImplementation("androidx.test.ext:junit:1.1.3")
         androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
