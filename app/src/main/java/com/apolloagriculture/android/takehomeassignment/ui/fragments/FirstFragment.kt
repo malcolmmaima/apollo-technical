@@ -67,13 +67,14 @@ class FirstFragment : Fragment() {
                 mainViewModel.weatherData.collect { temperature ->
                     binding.textViewToday.text =  "${temperature.today.lowTemp} - ${temperature.today.highTemp} °C"
                     binding.textViewTodaySmall.text = "${temperature.today.description}"
-                    changeIcon(temperature)
+
 
                     binding.textViewTomorrow.text = "${temperature.tomorrow.lowTemp} - ${temperature.today.highTemp} °C"
                     binding.textViewTomorrowSmall.text = "${temperature.tomorrow.description}"
 
                     binding.textViewAfterTomorrow.text = "${temperature.dayAfterTomorrow.lowTemp} - ${temperature.dayAfterTomorrow.highTemp} °C"
                     binding.textViewAfterTomorrowSmall.text = "${temperature.dayAfterTomorrow.description}"
+                    changeIcon(temperature)
                 }
             }
         }
@@ -89,41 +90,27 @@ class FirstFragment : Fragment() {
 
     private fun changeIcon(temperature: WeatherResponse) {
         //change icon for today, tomorrow and day after tomorrow
-        when(temperature.today.icon){
-            "CLEAR_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_clear_day)
-            "SCATTERED_CLOUDS_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_some_clouds)
-            "BROKEN_OVERCAST_CLOUDS_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_one_cloud)
-            "RAIN_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_rain)
-            "SNOW_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_snow)
-            "STORM_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_thunder)
-            "FOG_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_fog)
-            "CLEAR_NIGHT" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_clear_night)
-            else -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_clear_day)
-        }
 
-        when(temperature.tomorrow.icon){
-            "CLEAR_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_clear_day)
-            "SCATTERED_CLOUDS_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_some_clouds)
-            "BROKEN_OVERCAST_CLOUDS_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_one_cloud)
-            "RAIN_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_rain)
-            "SNOW_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_snow)
-            "STORM_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_thunder)
-            "FOG_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_fog)
-            "CLEAR_NIGHT" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_clear_night)
-            else -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_clear_day)
-        }
+        // create a hashmap containing the icon and the corresponding image resource e.g. "CLEAR_DAY" -> R.drawable.clear_day
+        // use the icon from the response to get the corresponding image resource
+        // set the image resource to the image view
 
-        when(temperature.dayAfterTomorrow.icon){
-            "CLEAR_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_clear_day)
-            "SCATTERED_CLOUDS_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_some_clouds)
-            "BROKEN_OVERCAST_CLOUDS_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_one_cloud)
-            "RAIN_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_rain)
-            "SNOW_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_snow)
-            "STORM_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_thunder)
-            "FOG_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_fog)
-            "CLEAR_NIGHT" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_clear_night)
-            else -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_clear_day)
-        }
+        val iconMap = hashMapOf(
+            "CLEAR_DAY" to R.drawable.ic_weather_clear_day,
+            "CLEAR_NIGHT" to R.drawable.ic_weather_clear_night,
+            "PARTLY_CLOUDY_DAY" to R.drawable.ic_weather_some_clouds,
+            "SCATTERED_CLOUDS_DAY" to R.drawable.ic_weather_some_clouds,
+            "BROKEN_OVERCAST_CLOUDS_DAY" to R.drawable.ic_weather_some_clouds,
+            "SUNNY" to R.drawable.ic_weather_cloud_sun,
+            "RAIN" to R.drawable.ic_weather_rain,
+            "SNOW" to R.drawable.ic_weather_snow,
+            "FOG" to R.drawable.ic_weather_fog,
+            "DRIZZLE" to R.drawable.ic_weather_drizzle_some_rain,
+        )
+
+        binding.imageViewToday.setImageResource(iconMap[temperature.today.icon] ?: R.drawable.ic_weather_clear_day)
+        binding.imageViewTomorrow.setImageResource(iconMap[temperature.tomorrow.icon] ?: R.drawable.ic_weather_clear_day)
+        binding.imageViewAfterTomorrow.setImageResource(iconMap[temperature.dayAfterTomorrow.icon] ?: R.drawable.ic_weather_clear_day)
 
     }
 
