@@ -23,9 +23,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.apolloagriculture.android.takehomeassignment.R
 import com.apolloagriculture.android.takehomeassignment.databinding.FragmentFirstBinding
 import com.apolloagriculture.android.takehomeassignment.ui.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.network.data.models.WeatherResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -65,6 +67,7 @@ class FirstFragment : Fragment() {
                 mainViewModel.weatherData.collect { temperature ->
                     binding.textViewToday.text =  "${temperature.today.lowTemp} - ${temperature.today.highTemp} °C"
                     binding.textViewTodaySmall.text = "${temperature.today.description}"
+                    changeIcon(temperature)
 
                     binding.textViewTomorrow.text = "${temperature.tomorrow.lowTemp} - ${temperature.today.highTemp} °C"
                     binding.textViewTomorrowSmall.text = "${temperature.tomorrow.description}"
@@ -82,6 +85,46 @@ class FirstFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun changeIcon(temperature: WeatherResponse) {
+        //change icon for today, tomorrow and day after tomorrow
+        when(temperature.today.icon){
+            "CLEAR_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_clear_day)
+            "SCATTERED_CLOUDS_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_some_clouds)
+            "BROKEN_OVERCAST_CLOUDS_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_one_cloud)
+            "RAIN_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_rain)
+            "SNOW_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_snow)
+            "STORM_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_thunder)
+            "FOG_DAY" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_fog)
+            "CLEAR_NIGHT" -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_clear_night)
+            else -> binding.imageViewToday.setImageResource(R.drawable.ic_weather_clear_day)
+        }
+
+        when(temperature.tomorrow.icon){
+            "CLEAR_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_clear_day)
+            "SCATTERED_CLOUDS_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_some_clouds)
+            "BROKEN_OVERCAST_CLOUDS_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_one_cloud)
+            "RAIN_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_rain)
+            "SNOW_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_snow)
+            "STORM_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_thunder)
+            "FOG_DAY" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_fog)
+            "CLEAR_NIGHT" -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_clear_night)
+            else -> binding.imageViewTomorrow.setImageResource(R.drawable.ic_weather_clear_day)
+        }
+
+        when(temperature.dayAfterTomorrow.icon){
+            "CLEAR_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_clear_day)
+            "SCATTERED_CLOUDS_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_some_clouds)
+            "BROKEN_OVERCAST_CLOUDS_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_one_cloud)
+            "RAIN_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_rain)
+            "SNOW_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_snow)
+            "STORM_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_thunder)
+            "FOG_DAY" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_fog)
+            "CLEAR_NIGHT" -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_clear_night)
+            else -> binding.imageViewAfterTomorrow.setImageResource(R.drawable.ic_weather_clear_day)
+        }
+
     }
 
     private fun fetchWeatherData(){
