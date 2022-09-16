@@ -51,10 +51,5 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(Libraries.kotlinStandardLib)
     implementation(Libraries.ktx)
-
-    // For Prefix Transformation View Utility
-    implementation("androidx.compose.ui:ui-text:1.0.1")
-
-    // timber
     implementation(Libraries.timber)
 }

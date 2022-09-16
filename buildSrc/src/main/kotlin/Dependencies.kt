@@ -15,7 +15,7 @@ object Libraries {
     const val kotlinStandardLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}"
     const val ktx = "androidx.core:core-ktx:${Versions.ktx}"
 
-    // test libraries
+    // Test libraries
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val annotation = "androidx.annotation:annotation:${Versions.annotation}"
 }

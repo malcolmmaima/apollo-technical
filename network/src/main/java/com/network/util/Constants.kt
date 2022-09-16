@@ -16,5 +16,5 @@
 package com.network.util
 
 object Constants {
-    const val BASE_URL = "https://malcolmmaima.com/api/"
+    const val BASE_URL = "https://s3.eu-west-1.amazonaws.com/assets.apolloagriculture.com/recruitment/android/"
 }

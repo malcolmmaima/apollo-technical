@@ -64,7 +64,6 @@ android {
         implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
         implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
         implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
-        implementation("androidx.compose.runtime:runtime-livedata:1.2.0-alpha07")
         implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
 
         implementation(Libraries.koin)
