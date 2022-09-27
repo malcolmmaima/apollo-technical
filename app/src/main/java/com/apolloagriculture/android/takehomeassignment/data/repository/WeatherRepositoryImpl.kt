@@ -17,6 +17,9 @@ package com.apolloagriculture.android.takehomeassignment.data.repository
 
 import com.network.data.models.WeatherResponse
 import com.network.data.api.WeatherAPI
+import com.network.data.models.DayAfterTomorrow
+import com.network.data.models.Today
+import com.network.data.models.Tomorrow
 import com.network.network.APIResource
 import com.network.network.safeApiCall
 
@@ -31,6 +34,30 @@ internal class WeatherRepositoryImpl(
         safeApiCall {
             weatherAPI.fetchWeatherData()
         }
+
+    override suspend fun mockWeatherData(): APIResource<WeatherResponse> {
+        val weatherResponse = WeatherResponse(
+            dayAfterTomorrow = DayAfterTomorrow(
+                description = "Cloudy",
+                icon = "04d",
+                lowTemp = 20.0,
+                highTemp = 30.0
+            ),
+            today = Today(
+                description = "Cloudy",
+                icon = "04d",
+                lowTemp = 20.0,
+                highTemp = 30.0
+            ),
+            tomorrow = Tomorrow(
+                description = "Cloudy",
+                icon = "04d",
+                lowTemp = 20.0,
+                highTemp = 30.0
+            )
+        )
+        return APIResource.Success(weatherResponse)
+    }
 }
 
 

@@ -17,6 +17,6 @@ package com.network.data.models
 
 data class WeatherResponse(
     val dayAfterTomorrow: DayAfterTomorrow,
-    val today: DayAfterTomorrow,
+    val today: Today,
     val tomorrow: Tomorrow
 )

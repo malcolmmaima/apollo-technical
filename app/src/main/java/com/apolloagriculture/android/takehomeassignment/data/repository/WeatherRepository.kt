@@ -21,4 +21,6 @@ import com.network.network.APIResource
 interface WeatherRepository {
 
     suspend fun fetchWeatherData(): APIResource<WeatherResponse>
+
+    suspend fun mockWeatherData(): APIResource<WeatherResponse>
 }
