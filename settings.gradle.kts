@@ -13,7 +13,8 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             when (requested.id.id) {
-                "com.android.application", "com.android.library" -> useModule("com.android.tools.build:gradle:7.1.3")
+                "com.android.application", "com.android.library" ->
+                    useModule("com.android.tools.build:gradle:7.1.3")
             }
         }
     }

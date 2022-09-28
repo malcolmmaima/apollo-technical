@@ -23,4 +23,6 @@ interface WeatherRepository {
     suspend fun fetchWeatherData(): APIResource<WeatherResponse>
 
     suspend fun mockWeatherData(): APIResource<WeatherResponse>
+
+    suspend fun MockFailureRepository(): APIResource<WeatherResponse>
 }

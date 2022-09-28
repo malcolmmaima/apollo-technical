@@ -22,6 +22,7 @@ import com.network.data.models.Today
 import com.network.data.models.Tomorrow
 import com.network.network.APIResource
 import com.network.network.safeApiCall
+import okhttp3.ResponseBody
 
 /**
  * @param WeatherAPI
@@ -57,6 +58,10 @@ internal class WeatherRepositoryImpl(
             )
         )
         return APIResource.Success(weatherResponse)
+    }
+
+    override suspend fun MockFailureRepository(): APIResource<WeatherResponse> {
+        return APIResource.Error(errorBody = null, errorCode = 500, isNetworkError = true)
     }
 }
 

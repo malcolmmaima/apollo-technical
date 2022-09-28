@@ -80,6 +80,7 @@ android {
         testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.0")
 
         testImplementation("androidx.arch.core:core-testing:2.1.0")
+        testImplementation ("app.cash.turbine:turbine:0.11.0")
 
         testImplementation ("com.squareup.okhttp3:mockwebserver:4.10.0")
         androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
